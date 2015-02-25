@@ -1,0 +1,35 @@
+plugins {
+   id 'groovy'
+   id 'nu.studer.plugindev' version '1.0.3'
+}
+
+dependencies {
+   compile "org.codehaus.groovy:groovy-all:2.3.9"
+   compile 'org.flywaydb:flyway-gradle-plugin:3.1'
+   compile 'nu.studer:gradle-jooq-plugin:1.0.5'
+}
+
+version = '1.0.0'
+group = 'pl.codelabs'
+
+plugindev {
+    pluginImplementationClass 'pl.codelabs.flywayJooq.FlywayJooqPlugin'
+    pluginDescription 'Gradle plugin that improves integration of jOOQ and Flyway plugins by improving Gradle uptodate check on jOOQ task adding check of currently applied Flyway scripts.'
+    pluginLicenses 'Apache-2.0'
+    pluginTags 'gradle', 'plugin', 'jooq', 'flyway'
+    authorId 'wstrzalka'
+    authorName 'Wojciech Strzalka'
+    authorEmail 'wstrzalka@gmail.com'
+    projectUrl 'https://github.com/wstrzalka/gradle-flyway-jooq-plugin'
+    projectInceptionYear '2015'
+    done()
+}
+
+bintray {
+    user = "$BINTRAY_USER"
+    key = "$BINTRAY_API_KEY"
+    pkg.repo = 'gradle-plugins'
+    dryRun = true
+}
+
+wrapper.gradleVersion = '2.3'
