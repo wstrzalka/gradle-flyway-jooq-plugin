@@ -29,7 +29,7 @@ bintray {
     user = "$BINTRAY_USER"
     key = "$BINTRAY_API_KEY"
     pkg.repo = 'gradle-plugins'
-    dryRun = true
+    //dryRun = true
 }
 
 wrapper.gradleVersion = '2.3'
