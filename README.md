@@ -17,9 +17,7 @@ When both of them are applied flywayJooq adds an extra dependency to the jOOQ ta
 
 The plugin is hosted at [Bintray's JCenter](https://bintray.com/wstrzalka/gradle-plugins/gradle-flyway-jooq-plugin).
 
-## Gradle 1.x and 2.x
-To use the jOOQ plugin with versions of Gradle 1.x and 2.x, apply the plugin in your `build.gradle` script:
-
+## Gradle 1.x and 2.0
 ```groovy
 buildscript {
     repositories {
@@ -30,6 +28,13 @@ buildscript {
     }
 }
 apply plugin: 'pl.codelabs.flywayJooq'
+```
+
+## Gradle 2.1 and higher
+```
+plugins {
+  id 'pl.codelabs.flywayJooq' version '1.0.0'
+}
 ```
 
 # Tasks
