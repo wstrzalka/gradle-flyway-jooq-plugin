@@ -13,14 +13,16 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
- package pl.codelabs.flywayJooq
+package pl.codelabs.flywayJooq
 
-import org.gradle.api.*
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.Task
 
 /**
  * Plugin that registers a {@link FlywayJooqInfoFileTask} and add dependency to it for each jOOQ task.
  * Sets up 'flywayJooq' extension for reconfiguration in gradle script.
- */ 
+ */
 class FlywayJooqPlugin implements Plugin<Project> {
 
     Project project
@@ -28,16 +30,15 @@ class FlywayJooqPlugin implements Plugin<Project> {
     void apply(Project project) {
         this.project = project
 
-        project.getExtensions().create("flywayJooq", FlywayJooqExtension)
         project.afterEvaluate {
             if (isJOOQProject() && isFlywayProject()) {
-	        project.task('flywayJooqInfoFile', type: FlywayJooqInfoFileTask)
+                project.task('flywayJooqInfoFile', type: FlywayJooqInfoFileTask)
                 project.tasks.withType(nu.studer.gradle.jooq.JooqTask).each { applyDependencyToJooqTask(it) }
             } else {
-	       project.logger.warn("###################################################################################################")
-	       project.logger.warn("flywayJooq: Both Flyway and Jooq plugins needs to be applied in order to get this plugin to work!!!")
-	       project.logger.warn("###################################################################################################")
-	    }
+                project.logger.warn("###################################################################################################")
+                project.logger.warn("flywayJooq: Both Flyway and Jooq plugins needs to be applied in order to get this plugin to work!!!")
+                project.logger.warn("###################################################################################################")
+            }
         }
     }
 

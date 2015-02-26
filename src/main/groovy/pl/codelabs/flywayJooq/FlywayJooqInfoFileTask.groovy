@@ -13,11 +13,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
- package pl.codelabs.flywayJooq;
+package pl.codelabs.flywayJooq
 
 import org.flywaydb.core.Flyway
-import org.flywaydb.gradle.task.AbstractFlywayTask
 import org.flywaydb.core.internal.info.MigrationInfoDumper
+import org.flywaydb.gradle.task.AbstractFlywayTask
 
 /**
  * Gradle Task that generates info file with applied scripts.
@@ -25,13 +25,13 @@ import org.flywaydb.core.internal.info.MigrationInfoDumper
  */
 public class FlywayJooqInfoFileTask extends AbstractFlywayTask {
 
-    def infoFile = project.file(project.flywayJooq.infoFile)
+    File infoFile = project.file("${project.buildDir}/tmp/flywayJooqInfoFile/flywayJooq.info")
 
     FlywayJooqInfoFileTask() {
         group = ''
         description = 'Prints the details and status information about applied migrations to a file.'
 
-        // FIX IT: this shal be removed when/if the following is resolved
+        // FIX IT: this shall be removed when/if the following is resolved
         // https://github.com/flyway/flyway/issues/962
         project.afterEvaluate {
             if (isJavaProject()) {
@@ -42,12 +42,16 @@ public class FlywayJooqInfoFileTask extends AbstractFlywayTask {
     }
 
     def run(Flyway flyway) {
-       // we don't need to scan locations as we need only applied scripts
-       flyway.setLocations()
-       infoFile.withWriter { out -> out.writeLine(MigrationInfoDumper.dumpToAsciiTable(flyway.info().applied())) }    
+        // we don't need to scan locations as we need only applied scripts
+        flyway.setLocations()
+        // ensure directory exists
+        infoFile.getParentFile().mkdirs();
+        // call flyway to list applied scripts
+        infoFile.withWriter { out -> out.writeLine(MigrationInfoDumper.dumpToAsciiTable(flyway.info().applied())) }
     }
 
     protected boolean isJavaProject() {
+        // this is in order to avoid classpath modifications by base class
         return false
     }
 }
