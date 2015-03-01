@@ -11,7 +11,7 @@ you changed the database with flywayMigrate task.
 # Plugin
 
 ## General
-The flywayJooq plugin relies on two great plugins: [flyway-gradle-plugin](https://github.com/flyway/flyway) by Axel Fontaine 
+The flywayJooq plugin relies on two great plugins: [flyway-gradle-plugin](https://github.com/flyway/flyway) by boxfuse 
 and [gradle-jooq-plugin](https://github.com/etiennestuder/gradle-jooq-plugin) by Etienne Studer. 
 When both of them are applied flywayJooq adds an extra dependency to the jOOQ task that checks if there are any differences in applied scripts.
 
