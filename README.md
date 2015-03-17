@@ -4,9 +4,9 @@ gradle-jooq-flyway-plugin
 # Overview
 [Gradle](http://www.gradle.org) plugin that help with integration of [jOOQ](http://www.jooq.org) and [Flyway](http://www.flywaydb.org)
 plugins, improving Gradle uptodate check on jOOQ task by adding check of currently applied Flyway scripts.
-For each jOOQ task, the plugin adds dependency to Flyway by checking information wheather database schema changed or not since last generation. 
-If you rely on Flyway to manage database changes and using jOOQ same time - jOOQ plugin will regenerate your classes every time 
-you changed the database with flywayMigrate task.  
+For each jOOQ task, the plugin adds dependency to Flyway by checking wheather database schema has changed or not since last code generation. 
+If you rely on Flyway to manage database changes and using jOOQ same time - this plugin will ensure that jOOQ will regenerate your classes every time 
+you changed the database with Flyway.  
 
 # Plugin
 
@@ -24,7 +24,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'pl.codelabs:gradle-flyway-jooq-plugin:1.0.1'
+        classpath 'pl.codelabs:gradle-flyway-jooq-plugin:1.1.0'
     }
 }
 apply plugin: 'pl.codelabs.flywayJooq'
@@ -33,7 +33,7 @@ apply plugin: 'pl.codelabs.flywayJooq'
 ## Gradle 2.1 and higher
 ```
 plugins {
-  id 'pl.codelabs.flywayJooq' version '1.0.1'
+  id 'pl.codelabs.flywayJooq' version '1.1.0'
 }
 ```
 
