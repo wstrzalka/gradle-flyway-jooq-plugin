@@ -52,7 +52,7 @@ class FlywayJooqPlugin implements Plugin<Project> {
     }
 
     boolean isFlywayProject() {
-        project.plugins.hasPlugin('flyway')
+        project.plugins.hasPlugin('flyway') || project.plugins.hasPlugin('org.flywaydb.flyway')
     }
 }
 
