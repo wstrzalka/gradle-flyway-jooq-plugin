@@ -24,7 +24,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'pl.codelabs:gradle-flyway-jooq-plugin:1.1.0'
+        classpath 'pl.codelabs:gradle-flyway-jooq-plugin:1.2.0'
     }
 }
 apply plugin: 'pl.codelabs.flywayJooq'
@@ -33,7 +33,7 @@ apply plugin: 'pl.codelabs.flywayJooq'
 ## Gradle 2.1 and higher
 ```
 plugins {
-  id 'pl.codelabs.flywayJooq' version '1.1.0'
+  id 'pl.codelabs.flywayJooq' version '1.2.0'
 }
 ```
 
