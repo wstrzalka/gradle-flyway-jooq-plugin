@@ -17,7 +17,6 @@ package pl.codelabs.flywayJooq
 
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.internal.info.MigrationInfoDumper
-import org.flywaydb.gradle.task.AbstractFlywayTask
 import org.flywaydb.gradle.task.PublicAbstractFlywayTask
 
 /**
@@ -34,11 +33,11 @@ public class FlywayJooqInfoFileTask extends PublicAbstractFlywayTask {
     }
 
     def run(Flyway flyway) {
-        println "Dumping flyway info to ${infoFile}"
+        logger.info("Dumping flyway info to ${infoFile}" )
         // we don't need to scan locations as we need only applied scripts
         flyway.setLocations()
         // ensure directory exists
-        infoFile.getParentFile().mkdirs();
+        infoFile.getParentFile().mkdirs()
         // call flyway to list applied scripts
         infoFile.withWriter { out -> out.writeLine(MigrationInfoDumper.dumpToAsciiTable(flyway.info().applied())) }
     }
