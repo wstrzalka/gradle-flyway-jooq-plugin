@@ -18,40 +18,28 @@ package pl.codelabs.flywayJooq
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.internal.info.MigrationInfoDumper
 import org.flywaydb.gradle.task.AbstractFlywayTask
+import org.flywaydb.gradle.task.PublicAbstractFlywayTask
 
 /**
  * Gradle Task that generates info file with applied scripts.
  * Task is based on org.flywaydb.gradle.task.AbstractFlywayTask and Flyway utilities that do the hard work. 
  */
-public class FlywayJooqInfoFileTask extends AbstractFlywayTask {
+public class FlywayJooqInfoFileTask extends PublicAbstractFlywayTask {
 
     File infoFile = project.file("${project.buildDir}/tmp/flywayJooqInfoFile/flywayJooq.info")
 
     FlywayJooqInfoFileTask() {
         group = ''
         description = 'Prints the details and status information about applied migrations to a file.'
-
-        // FIX IT: this shall be removed when/if the following is resolved
-        // https://github.com/flyway/flyway/issues/962
-        project.afterEvaluate {
-            if (isJavaProject()) {
-                this.dependsOn.remove(project.tasks.testClasses)
-            }
-        }
-        // END OF FIX IT
     }
 
     def run(Flyway flyway) {
+        println "Dumping flyway info to ${infoFile}"
         // we don't need to scan locations as we need only applied scripts
         flyway.setLocations()
         // ensure directory exists
         infoFile.getParentFile().mkdirs();
         // call flyway to list applied scripts
         infoFile.withWriter { out -> out.writeLine(MigrationInfoDumper.dumpToAsciiTable(flyway.info().applied())) }
-    }
-
-    protected boolean isJavaProject() {
-        // this is in order to avoid classpath modifications by base class
-        return false
     }
 }
