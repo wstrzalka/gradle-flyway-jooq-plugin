@@ -18,6 +18,7 @@ package pl.codelabs.flywayJooq
 import org.flywaydb.core.Flyway
 import org.flywaydb.core.internal.info.MigrationInfoDumper
 import org.flywaydb.gradle.task.PublicAbstractFlywayTask
+import org.gradle.api.tasks.Internal
 
 /**
  * Gradle Task that generates info file with applied scripts.
@@ -25,6 +26,7 @@ import org.flywaydb.gradle.task.PublicAbstractFlywayTask
  */
 public class FlywayJooqInfoFileTask extends PublicAbstractFlywayTask {
 
+    @Internal
     File infoFile = project.file("${project.buildDir}/tmp/flywayJooqInfoFile/flywayJooq.info")
 
     FlywayJooqInfoFileTask() {
